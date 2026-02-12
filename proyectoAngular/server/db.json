@@ -1,0 +1,32 @@
+{
+  "pizzas": [
+    {
+      "id": 1,
+      "nombre": "Margarita",
+      "desc": "Tomate, Mozzarella, Albahaca, Aceite Oliva",
+      "precio": 6.00,
+      "imagen": "pizzas/margarita.png"
+    },
+    {
+      "id": 2,
+      "nombre": "Piamontesa",
+      "desc": "Peperoni Picante, Tomate, Queso, Champiñones, Aceituna",
+      "precio": 8.50,
+      "imagen": "pizzas/piamontesa.png"
+    },
+    {
+      "id": 3,
+      "nombre": "Cuatro Quesos",
+      "desc": "Tomate, Mozzarella, Gorgonzola, Cabra, Edam",
+      "precio": 8.50,
+      "imagen": "pizzas/cuatroQuesos.png"
+    },
+    {
+      "id": 4,
+      "nombre": "Calabresa",
+      "desc": "Tomate, Champiñones, Pimiento Rojo, Longaniza, Mozzarella, Aceitunas",
+      "precio": 8.50,
+      "imagen": "pizzas/calabresa.png"
+    }
+  ]
+}
