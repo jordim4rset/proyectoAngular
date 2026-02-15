@@ -1,1 +1,56 @@
-/* You can add global styles to this file, and also import other style files */
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+body.acc-fuente-grande #contenido-web * {
+  font-size: 1.25rem !important;
+}
+body.acc-fuente-grande h1,
+body.acc-fuente-grande h2 {
+  font-size: 2.5rem !important;
+}
+
+body.acc-modo-oscuro {
+  background-color: #121212 !important;
+}
+
+body.acc-modo-oscuro #contenido-web,
+body.acc-modo-oscuro #contenido-web main,
+body.acc-modo-oscuro #contenido-web .card,
+body.acc-modo-oscuro #contenido-web table,
+body.acc-modo-oscuro #contenido-web nav,
+body.acc-modo-oscuro #contenido-web footer {
+  background-color: #1e1e1e !important;
+  color: #ffffff !important;
+  border-color: #444 !important;
+}
+
+body.acc-modo-oscuro .text-muted,
+body.acc-modo-oscuro .text-dark,
+body.acc-modo-oscuro td,
+body.acc-modo-oscuro th {
+  color: #ffffff !important;
+}
+
+body.acc-escala-grises #contenido-web {
+  filter: grayscale(100%) !important;
+  pointer-events: auto;
+}
+
+.dropup {
+  filter: none !important;
+}
+
+body.acc-remarcar-enlaces a,
+body.acc-remarcar-enlaces button.btn {
+  outline: 4px solid #ffc107 !important;
+  outline-offset: 2px;
+  font-weight: bold !important;
+}

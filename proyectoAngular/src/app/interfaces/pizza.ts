@@ -3,5 +3,7 @@ export interface Pizza {
   nombre: string;
   desc: string;
   precio: number;
+  categoria: string;
+  visibilidad: boolean;
   imagen: string;
 }

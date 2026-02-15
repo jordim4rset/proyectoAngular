@@ -1,10 +1,56 @@
+<div id="contenido-web">
+  <app-navbar></app-navbar>
 
-<nav>
-    <a href="">INICIO</a>
-    <a href="">CARTA</a>
-    <a routerLink="gestion">GESTIÓN</a>
-    <a href="">LOGIN</a>
-</nav>
+  <main class="container my-5">
+    <router-outlet></router-outlet>
+  </main>
 
-<router-outlet>
-</router-outlet>
+  <footer class="text-center py-4 border-top bg-light mt-5">
+    <p class="mb-0 text-muted">&copy; JORDI MARSET TORTOSA 2DAW</p>
+  </footer>
+</div>
+
+<div class="dropup position-fixed bottom-0 start-0 m-4" style="z-index: 2000;">
+  <button class="btn btn-dark dropdown-toggle shadow-lg border-2 border-light py-2 px-3"
+          type="button"
+          data-bs-toggle="dropdown"
+          aria-expanded="false">
+    <i class="bi bi-universal-access me-2"></i>Accesibilidad
+  </button>
+
+  <ul class="dropdown-menu shadow-lg p-2" style="min-width: 220px;">
+    <li><h6 class="dropdown-header border-bottom mb-2 pb-2">Opciones visuales</h6></li>
+
+    <li>
+      <button (click)="toggleAccesibilidad('fuente')" class="dropdown-item rounded-2 py-2" type="button">
+        <i class="bi bi-fonts me-2 text-primary"></i>Aumentar Fuente
+      </button>
+    </li>
+
+    <li>
+      <button (click)="toggleAccesibilidad('oscuro')" class="dropdown-item rounded-2 py-2" type="button">
+        <i class="bi bi-moon-stars me-2 text-warning"></i>Modo Oscuro
+      </button>
+    </li>
+
+    <li>
+      <button (click)="toggleAccesibilidad('grises')" class="dropdown-item rounded-2 py-2" type="button">
+        <i class="bi bi-contrast me-2 text-secondary"></i>Escala de Grises
+      </button>
+    </li>
+
+    <li>
+      <button (click)="toggleAccesibilidad('enlaces')" class="dropdown-item rounded-2 py-2" type="button">
+        <i class="bi bi-link-45deg me-2 text-success"></i>Remarcar Enlaces
+      </button>
+    </li>
+
+    <li><hr class="dropdown-divider"></li>
+
+    <li>
+      <button (click)="resetAccesibilidad()" class="dropdown-item text-danger fw-bold rounded-2 py-2" type="button">
+        <i class="bi bi-arrow-counterclockwise me-2"></i>Restablecer Todo
+      </button>
+    </li>
+  </ul>
+</div>

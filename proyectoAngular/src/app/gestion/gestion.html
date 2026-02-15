@@ -1,17 +1,128 @@
-<h2>CREAR PIZZAS</h2>
+<section class="container my-5 admin-section">
+  <div class="row g-5">
 
-<form action="">
-  <label for="nombre">Nombre: </label>
-  <input type="text" name="nombre">
-  <br>
-  <label for="descripccion">Descripcción: </label>
-  <input type="text" name="descripccion">
-  <br>
-  <label for="precio">Precio: </label>
-  <input type="number" name="precio">
-  <br>
-  <label for="imagen">Imágen: </label>
-  <input type="file" name="imagen">
-  <br>
-  <button type="submit">CREAR</button>
-</form>
+    <div class="col-lg-5">
+      <div class="card shadow-sm border-0 p-4">
+        <h2 class="h4 fw-bold mb-4 text-uppercase border-bottom pb-2">
+          {{ isEdit ? 'Editar Pizza' : 'Crear Nueva Pizza' }}
+        </h2>
+
+        <form class="row g-3">
+          <div class="col-12">
+            <label class="form-label fw-semibold">Nombre</label>
+            <input type="text" name="nombre" [(ngModel)]="newPizza.nombre" class="form-control" placeholder="Ej: Margherita Especial">
+          </div>
+
+          <div class="col-12">
+            <label class="form-label fw-semibold">Descripción</label>
+            <textarea name="descripccion" [(ngModel)]="newPizza.desc" class="form-control" rows="2" placeholder="Ingredientes y detalles..."></textarea>
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label fw-semibold">Precio (€)</label>
+            <div class="input-group">
+              <span class="input-group-text">€</span>
+              <input type="number" name="precio" [(ngModel)]="newPizza.precio" class="form-control">
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label fw-semibold">Categoría</label>
+            <input type="text" name="categoria" [(ngModel)]="newPizza.categoria" class="form-control" placeholder="Ej: Clásica">
+          </div>
+
+          <div class="col-12">
+            <label class="form-label fw-semibold">Imagen del producto</label>
+            <input type="file" class="form-control" #fileInput (change)="changeImage(fileInput)">
+          </div>
+
+          <div class="col-12">
+            <div class="form-check form-switch mt-2">
+              <input class="form-check-input" type="checkbox" id="visibilidad" name="visibilidad" [(ngModel)]="newPizza.visibilidad">
+              <label class="form-check-label" for="visibilidad">Publicar inmediatamente</label>
+            </div>
+          </div>
+
+          <div class="col-12 mt-4">
+            <button (click)="addPizza()" [disabled]="!newPizza.nombre" class="btn btn-dark w-100 py-2 fw-bold text-uppercase">
+              <i class="bi" [ngClass]="isEdit ? 'bi-check-circle me-2' : 'bi-plus-circle me-2'"></i>
+              {{ isEdit ? 'Guardar Cambios' : 'Añadir a la Carta' }}
+            </button>
+
+            <button *ngIf="isEdit" (click)="cancelarEdicion()" class="btn btn-link w-100 mt-2 text-decoration-none text-muted">
+              Cancelar edición
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="col-lg-7">
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <h3 class="h4 fw-bold mb-0 text-uppercase">Gestión de Inventario</h3>
+        <span class="badge bg-dark rounded-pill">{{ listaPizzas.length }} Pizzas</span>
+      </div>
+
+      <div class="table-responsive bg-white rounded shadow-sm border">
+        <table class="table table-hover align-middle mb-0">
+          <thead class="table-light text-secondary">
+            <tr>
+              <th class="ps-3" style="font-size: 0.8rem;">IMAGEN</th>
+              <th style="font-size: 0.8rem;">NOMBRE</th>
+              <th style="font-size: 0.8rem;">PRECIO</th>
+              <th style="font-size: 0.8rem;">VISIBILIDAD</th>
+              <th class="text-end pe-3" style="font-size: 0.8rem;">ACCIONES</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (pizza of listaPizzas; track pizza.id) {
+              <tr>
+                <td class="ps-3">
+                  <img [src]="pizza.imagen" class="rounded shadow-sm object-fit-cover" width="50" height="50" *ngIf="pizza.imagen">
+                  <div class="bg-light rounded d-inline-block border text-center" style="width: 50px; height: 50px; line-height: 50px;" *ngIf="!pizza.imagen">
+                    <i class="bi bi-image text-muted"></i>
+                  </div>
+                </td>
+                <td>
+                  <span class="fw-bold d-block text-dark">{{ pizza.nombre }}</span>
+                  <small class="text-muted d-block text-truncate" style="max-width: 150px;">{{ pizza.categoria }}</small>
+                </td>
+                <td><span class="fw-bold">{{ pizza.precio }}€</span></td>
+
+                <td>
+                  <button (click)="cambiarVisibilidad(pizza)" class="border-0 bg-transparent p-0">
+                    @if (pizza.visibilidad) {
+                      <span class="badge bg-success-subtle text-success border border-success-subtle px-3 py-2">
+                        <i class="bi bi-eye-fill me-1"></i> Visible
+                      </span>
+                    } @else {
+                      <span class="badge bg-light text-secondary border px-3 py-2">
+                        <i class="bi bi-eye-slash-fill me-1"></i> Oculto
+                      </span>
+                    }
+                  </button>
+                </td>
+
+                <td class="text-end pe-3">
+                  <button (click)="prepareEdit(pizza)" class="btn btn-outline-primary btn-sm rounded-pill px-3 me-2">
+                    <i class="bi bi-pencil me-1"></i> Editar
+                  </button>
+                  <button (click)="deletePizza(pizza.id)" class="btn btn-outline-danger btn-sm rounded-pill px-3">
+                    <i class="bi bi-trash3 me-1"></i> Eliminar
+                  </button>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+
+        @if (listaPizzas.length === 0) {
+          <div class="p-5 text-center bg-white">
+            <i class="bi bi-inbox text-muted fs-1 d-block mb-3"></i>
+            <p class="mb-0 text-muted fst-italic">No hay pizzas registradas en el sistema.</p>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,35 @@
+<section class="container my-5">
+  <header class="text-center mb-5">
+    <h1 class="display-4 fw-bold text-uppercase italic-title">Nuestra Carta de Pizzas</h1>
+    <p class="lead text-muted fst-italic">Disfruta de la verdadera comida Italiana</p>
+    <hr class="mx-auto border-danger opacity-75" style="width: 60px; border-width: 3px;">
+  </header>
+
+  <div class="row g-4">
+    @for (pizza of pizzasVisibles; track pizza.id) {
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="card h-100 shadow-sm border-0 pizza-hover-card">
+          <div class="ratio ratio-16x9 overflow-hidden rounded-top">
+            <img [src]="pizza.imagen || 'assets/placeholder-pizza.jpg'"
+                 class="card-img-top object-fit-cover transition-zoom"
+                 [alt]="pizza.nombre">
+          </div>
+
+          <div class="card-body d-flex flex-column p-4">
+            <div class="d-flex justify-content-between align-items-start mb-2">
+              <h3 class="h5 card-title fw-bold mb-0 text-dark">{{ pizza.nombre }}</h3>
+              <span class="badge rounded-pill bg-success-subtle text-success border border-success">
+                {{ pizza.precio }}
+              </span>
+            </div>
+
+            <p class="card-text text-muted small flex-grow-1">
+              {{ pizza.desc }}
+            </p>
+
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+</section>
